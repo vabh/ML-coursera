@@ -22,14 +22,14 @@ htheta = sigmoid(X * theta);
 J = -y' * log(htheta) - (1 - y)' * log(1 - htheta);
 J = sum(J) / m + sum(theta(2:n) .^ 2) * lambda / 2 / m;
 
-grad = sum(X' * (htheta - y)) / m;
-
-grad(1) = sum((htheta - y)' * X(:,1)) / m;
-for i=2:n
-    grad(i) = sum((htheta - y)' * X(:,i)) / m + theta(i) * lambda / m;
-end
-
-
+% grad = sum(X' * (htheta - y)) / m;
+% 
+% grad(1) = sum((htheta - y)' * X(:,1)) / m;
+% for i=2:n
+%     grad(i) = sum((htheta - y)' * X(:,i)) / m + theta(i) * lambda / m;
+% end
+grad = (X' * (htheta - y)) / m;
+grad(2:n) = grad(2:n) + theta(2:n) .* (lambda / m);
 
 % =============================================================
 
